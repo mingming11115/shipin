@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Harness2 GitHub 热度卡（录屏用）</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --border:#30363d;
+    --fg:#e6edf3; --muted:#8b949e;
+    --green:#3fb950; --yellow:#e3b341; --purple:#a371f7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    height:100vh; display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .stage{width:min(1400px,92vw)}
+  .hint{
+    text-align:center; color:var(--muted); font-size:20px;
+    margin-bottom:28px; letter-spacing:2px;
+  }
+  .hint b{color:var(--yellow)}
+  .card{
+    background:var(--panel); border:1px solid var(--border); border-radius:16px;
+    padding:48px 56px; box-shadow:0 30px 80px rgba(0,0,0,.55);
+    opacity:0; transform:translateX(-40px); transition:all .8s cubic-bezier(.2,.8,.2,1);
+  }
+  .card.in{opacity:1; transform:none}
+  .repo-head{display:flex; align-items:center; gap:18px; margin-bottom:10px}
+  .repo-head svg{width:46px;height:46px;fill:#e6edf3}
+  .repo-name{font-size:40px; font-weight:600}
+  .repo-name span{color:var(--muted)}
+  .badge{
+    font-size:16px; color:var(--fg); border:1px solid var(--border);
+    border-radius:999px; padding:4px 14px; background:#21262d; margin-left:8px;
+  }
+  .sub{color:var(--muted); font-size:20px; margin:6px 0 34px 64px}
+  .stats{display:flex; gap:36px; margin-left:64px}
+  .stat{
+    flex:1; background:#0d1117; border:1px solid var(--border); border-radius:12px;
+    padding:26px 30px; position:relative;
+  }
+  .stat .label{font-size:18px; color:var(--muted); letter-spacing:1px}
+  .stat .num{font-size:58px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1.15}
+  .stat.star .num{color:var(--yellow)}
+  .stat.fork .num{color:var(--green)}
+  .stat.issue .num{color:var(--purple)}
+  .stat .icon{position:absolute; top:22px; right:26px; font-size:26px}
+  .timeline{margin:40px 0 0 64px}
+  .tl-caption{font-size:18px; color:var(--muted); margin-bottom:12px}
+  .tl-bar{
+    height:10px; background:#21262d; border-radius:999px; overflow:hidden; position:relative;
+  }
+  .tl-fill{
+    height:100%; width:0%; border-radius:999px;
+    background:linear-gradient(90deg,#e3b341,#f0c86a);
+    transition:width 2.6s cubic-bezier(.3,.7,.3,1);
+  }
+  .tl-dates{display:flex; justify-content:space-between; margin-top:10px; color:var(--muted); font-size:17px}
+  .tl-dates b{color:var(--fg)}
+  .rate{
+    margin:26px 0 0 64px; font-size:22px; color:var(--fg);
+    opacity:0; transition:opacity .8s;
+  }
+  .rate.in{opacity:1}
+  .rate b{color:var(--yellow); font-size:26px}
+  .src{position:fixed; right:26px; bottom:20px; color:var(--muted); font-size:14px}
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="hint" id="hint">按 <b>空格</b> 启动动画　｜　按 <b>R</b> 重播　｜　F11 全屏后录屏</div>
+    <div class="card" id="card">
+      <div class="repo-head">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        <div class="repo-name">google-research <span>/</span> harness2</div>
+        <div class="badge">Public</div>
+      </div>
+      <div class="sub">Recursive Agent Harnessing for an Open World · arXiv:2610.14224</div>
+      <div class="stats">
+        <div class="stat star"><div class="icon">★</div><div class="label">STARS</div><div class="num" id="n-star">0</div></div>
+        <div class="stat fork"><div class="icon">⑂</div><div class="label">FORKS</div><div class="num" id="n-fork">0</div></div>
+        <div class="stat issue"><div class="icon">◎</div><div class="label">OPEN ISSUES</div><div class="num" id="n-issue">0</div></div>
+      </div>
+      <div class="timeline">
+        <div class="tl-caption">仓库存活时间：<b>2026-10-06</b> 创建 → <b>2026-11-21</b>（约 6 周）</div>
+        <div class="tl-bar"><div class="tl-fill" id="tl-fill"></div></div>
+        <div class="tl-dates"><b>10.06 建库</b><span>10.20</span><span>11.01</span><span>11.12</span><b>11.21 今天</b></div>
+      </div>
+      <div class="rate" id="rate">平均增速 ≈ <b>+400 star / 天</b>　·　社区已出现多个第三方移植框架</div>
+    </div>
+  </div>
+  <div class="src">数据：api.github.com · 查询于 2026-11-21</div>
+<script>
+  const TARGET = {star: 24623, fork: 2463, issue: 185};
+  const DUR = 2000;               // 数字滚动时长 ms
+  let running = false;
+
+  function animateNum(el, to, dur){
+    const t0 = performance.now();
+    function tick(t){
+      const p = Math.min((t - t0) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);          // easeOutCubic
+      el.textContent = Math.round(to * ease).toLocaleString('en-US');
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function play(){
+    if (running) return;
+    running = true;
+    document.getElementById('hint').style.opacity = .25;
+    const card = document.getElementById('card');
+    card.classList.add('in');
+    setTimeout(()=>animateNum(document.getElementById('n-star'), TARGET.star, DUR),      500);
+    setTimeout(()=>animateNum(document.getElementById('n-fork'), TARGET.fork, DUR),     1100);
+    setTimeout(()=>animateNum(document.getElementById('n-issue'), TARGET.issue, DUR),  1700);
+    setTimeout(()=>{ document.getElementById('tl-fill').style.width = '100%'; },        500);
+    setTimeout(()=>{ document.getElementById('rate').classList.add('in'); },           2700);
+  }
+
+  function reset(){
+    running = false;
+    document.getElementById('hint').style.opacity = 1;
+    document.getElementById('card').classList.remove('in');
+    document.getElementById('rate').classList.remove('in');
+    document.getElementById('tl-fill').style.width = '0%';
+    for (const id of ['n-star','n-fork','n-issue']) document.getElementById(id).textContent = '0';
+  }
+
+  window.addEventListener('keydown', e=>{
+    if (e.code === 'Space'){ e.preventDefault(); play(); }
+    if (e.key === 'r' || e.key === 'R'){ reset(); }
+  });
+</script>
+</body>
+</html>

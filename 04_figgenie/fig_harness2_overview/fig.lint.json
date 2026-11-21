@@ -1,0 +1,166 @@
+{
+ "svg": "fig.svg",
+ "spec": "spec.json",
+ "width": 454.0,
+ "height": 288.0,
+ "errors": 0,
+ "warnings": 11,
+ "findings": [
+  {
+   "severity": "warn",
+   "code": "centre.x",
+   "message": "label of n:library is -6.1 pt off the box centre horizontally",
+   "elements": [
+    "n:library"
+   ],
+   "bbox": [
+    89.5390625,
+    255.6,
+    220.16810607910156,
+    261.3
+   ]
+  },
+  {
+   "severity": "warn",
+   "code": "centre.x",
+   "message": "label of n:fixed-note is +4.5 pt off the box centre horizontally",
+   "elements": [
+    "n:fixed-note"
+   ],
+   "bbox": [
+    108,
+    266.1,
+    225.5219268798828,
+    271.9
+   ]
+  },
+  {
+   "severity": "warn",
+   "code": "centre.y",
+   "message": "label of n:q-ellipsis is +2.1 pt off the box centre vertically",
+   "elements": [
+    "n:q-ellipsis"
+   ],
+   "bbox": [
+    182.2890625,
+    30.8,
+    189.90304565429688,
+    31.5
+   ]
+  },
+  {
+   "severity": "warn",
+   "code": "spec.label",
+   "message": "n:library text \"adopted harnesses lessons\" does not match spec label \"adopted harnesses · lessons\"",
+   "elements": [
+    "n:library"
+   ],
+   "bbox": null
+  },
+  {
+   "severity": "warn",
+   "code": "text.padding",
+   "message": "label \"Domain-specific cand.\" has < 1.5 pt padding inside n:dom",
+   "elements": [
+    "n:dom"
+   ],
+   "bbox": [
+    170.484375,
+    143.1,
+    231.83229064941406,
+    148.8
+   ]
+  },
+  {
+   "severity": "warn",
+   "code": "title.centre",
+   "message": "title \"Task-Level Recursion\" of c:task-level sits -7.6 pt off the centre of its headroom (52–86); shift it by +7.6 pt",
+   "elements": [
+    "c:task-level"
+   ],
+   "bbox": [
+    190.2734375,
+    58.8,
+    263.44537353515625,
+    64.1
+   ]
+  },
+  {
+   "severity": "warn",
+   "code": "title.centre",
+   "message": "title \"improve the current \" of c:task-level sits +4.4 pt off the centre of its headroom (52–86); shift it by -4.4 pt",
+   "elements": [
+    "c:task-level"
+   ],
+   "bbox": [
+    180.40625,
+    70.6,
+    274.588134765625,
+    76.3
+   ]
+  },
+  {
+   "severity": "warn",
+   "code": "title.centre",
+   "message": "title \"Harness Editor\" of c:editor sits +6.5 pt off the centre of its headroom (86–126); shift it by -6.5 pt",
+   "elements": [
+    "c:editor"
+   ],
+   "bbox": [
+    176.8828125,
+    109.9,
+    225.7727508544922,
+    115.1
+   ]
+  },
+  {
+   "severity": "warn",
+   "code": "title.centre",
+   "message": "title \"Propose\" of c:editor sits +15.4 pt off the centre of its headroom (86–126); shift it by -15.4 pt",
+   "elements": [
+    "c:editor"
+   ],
+   "bbox": [
+    188.8359375,
+    118.6,
+    213.8139190673828,
+    124.3
+   ]
+  },
+  {
+   "severity": "warn",
+   "code": "title.centre",
+   "message": "title \"Harnessing-Level Rec\" of c:harness-level sits -2.8 pt off the centre of its headroom (206–234); shift it by +2.8 pt",
+   "elements": [
+    "c:harness-level"
+   ],
+   "bbox": [
+    178.8359375,
+    213.8,
+    274.8768310546875,
+    220.6
+   ]
+  },
+  {
+   "severity": "warn",
+   "code": "title.centre",
+   "message": "title \"improve how future h\" of c:harness-level sits +7.4 pt off the centre of its headroom (206–234); shift it by -7.4 pt",
+   "elements": [
+    "c:harness-level"
+   ],
+   "bbox": [
+    167.8046875,
+    224.6,
+    286.85052490234375,
+    230.3
+   ]
+  },
+  {
+   "severity": "info",
+   "code": "density.nodes",
+   "message": "15 labelled boxes is above the double-column q3 budget 13",
+   "elements": [],
+   "bbox": null
+  }
+ ]
+}

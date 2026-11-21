@@ -1,0 +1,263 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 454 288" font-family="'TeX Gyre Heros','Helvetica Neue',Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="head-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3c78d8"/>
+    </marker>
+    <marker id="head-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8e7cc3"/>
+    </marker>
+    <marker id="head-grey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#868686"/>
+    </marker>
+  </defs>
+
+  <!-- white canvas -->
+  <rect x="0" y="0" width="454" height="288" fill="#ffffff"/>
+
+  <!-- ============ task stream strip ============ -->
+  <g id="c:task-stream" data-kind="container">
+    <rect x="12" y="16" width="216" height="28" rx="4" fill="none" stroke="none"/>
+    <text x="14" y="20" font-size="6" fill="#868686">Open-world task stream</text>
+    <text x="14" y="28.5" font-size="6" fill="#868686">(no ground-truth verifier)</text>
+  </g>
+  <g id="n:q1" data-kind="node">
+    <rect x="115" y="24" width="24" height="14" rx="2.5" fill="#ffffff" stroke="#9dc3e6" stroke-width="0.56"/>
+    <text x="127" y="33.5" font-size="6.5" fill="#1a1a2e" text-anchor="middle">q<tspan dy="1.8" font-size="4.5">1</tspan></text>
+  </g>
+  <g id="n:q2" data-kind="node">
+    <rect x="150" y="24" width="24" height="14" rx="2.5" fill="#ffffff" stroke="#9dc3e6" stroke-width="0.56"/>
+    <text x="162" y="33.5" font-size="6.5" fill="#1a1a2e" text-anchor="middle">q<tspan dy="1.8" font-size="4.5">2</tspan></text>
+  </g>
+  <g id="n:q-ellipsis" data-kind="node">
+    <text x="186" y="31.5" font-size="6.5" fill="#868686" text-anchor="middle">...</text>
+  </g>
+  <g id="n:qn" data-kind="node">
+    <rect x="196" y="24" width="24" height="14" rx="2.5" fill="#ffffff" stroke="#9dc3e6" stroke-width="0.56"/>
+    <text x="208" y="33.5" font-size="6.5" fill="#1a1a2e" text-anchor="middle">q<tspan dy="1.8" font-size="4.5">N</tspan></text>
+  </g>
+  <g id="e:next-task" data-kind="edge" data-from="qn" data-to="q1">
+    <path d="M208,22 C208,8 127,8 127,22" fill="none" stroke="#8e7cc3" stroke-width="0.63" stroke-dasharray="2.5 1.9" marker-end="url(#head-purple)"/>
+    <text x="240" y="12" font-size="6" font-style="italic" fill="#8e7cc3">move to the next task</text>
+  </g>
+
+  <!-- ============ Band A: task-level recursion ============ -->
+  <g id="c:task-level" data-kind="container">
+    <rect x="12" y="52" width="430" height="138" rx="8" fill="#eaf2fb" stroke="#9dc3e6" stroke-width="0.6"/>
+    <text x="227" y="64" font-size="7" font-weight="bold" fill="#1a1a2e" text-anchor="middle">Task-Level Recursion</text>
+    <text x="227" y="75" font-size="6" fill="#868686" text-anchor="middle">improve the current task's harness</text>
+  </g>
+
+  <!-- agent anchor card -->
+  <g id="n:agent-anchor" data-kind="node">
+    <rect x="14" y="86" width="78" height="66" rx="4" fill="#ffffff" stroke="#9dc3e6" stroke-width="0.56"/>
+    <rect x="22" y="92" width="62" height="13" rx="2.5" fill="#eaf2fb" stroke="#9dc3e6" stroke-width="0.56"/>
+    <text x="50" y="101" font-size="6.5" fill="#1a1a2e" text-anchor="middle">Model M</text>
+    <g transform="translate(76,98.5)" stroke="#6fa8dc" stroke-width="0.7" stroke-linecap="round">
+      <line x1="-3.5" y1="0" x2="3.5" y2="0"/><line x1="0" y1="-3.5" x2="0" y2="3.5"/>
+      <line x1="-2.4" y1="-2.4" x2="2.4" y2="2.4"/><line x1="-2.4" y1="2.4" x2="2.4" y2="-2.4"/>
+    </g>
+    <rect x="28" y="109" width="60" height="8" rx="1.5" fill="#ffffff" stroke="#b7b7b7" stroke-width="0.5"/>
+    <text x="32" y="115" font-size="6" fill="#555555">system prompt</text>
+    <rect x="28" y="119" width="60" height="8" rx="1.5" fill="#ffffff" stroke="#b7b7b7" stroke-width="0.5"/>
+    <text x="32" y="125" font-size="6" fill="#555555">memory</text>
+    <rect x="28" y="129" width="60" height="8" rx="1.5" fill="#ffffff" stroke="#b7b7b7" stroke-width="0.5"/>
+    <text x="32" y="135" font-size="6" fill="#555555">skills</text>
+    <text x="53" y="146.5" font-size="6" fill="#1a1a2e" text-anchor="middle">Agent = Model + Harness</text>
+  </g>
+
+  <!-- executor -->
+  <g id="n:executor" data-kind="node">
+    <rect x="100" y="86" width="54" height="66" rx="4" fill="#ffffff" stroke="#9dc3e6" stroke-width="0.56"/>
+    <g transform="translate(127,101)">
+      <line x1="0" y1="-11" x2="0" y2="-7" stroke="#3c78d8" stroke-width="0.7"/>
+      <circle cx="0" cy="-12" r="1.6" fill="#3c78d8"/>
+      <rect x="-8" y="-7" width="16" height="13" rx="4" fill="#dceafc" stroke="#3c78d8" stroke-width="0.7"/>
+      <circle cx="-3.2" cy="-1.5" r="1.7" fill="#1a1a2e"/>
+      <circle cx="3.2" cy="-1.5" r="1.7" fill="#1a1a2e"/>
+      <path d="M-3,3.5 Q0,5.5 3,3.5" fill="none" stroke="#1a1a2e" stroke-width="0.6"/>
+    </g>
+    <text x="127" y="124" font-size="7" fill="#1a1a2e" text-anchor="middle">Agent Executor</text>
+    <text x="127" y="133" font-size="6" fill="#868686" text-anchor="middle">runs q<tspan dy="1.8" font-size="4.5">t</tspan><tspan dy="-1.8"> with H</tspan></text>
+  </g>
+
+  <!-- editor container with candidate mini-cards -->
+  <g id="c:editor" data-kind="container">
+    <rect x="162" y="86" width="78" height="66" rx="4" fill="#ffffff" stroke="#3c78d8" stroke-width="0.7"/>
+    <g transform="translate(201,97)">
+      <line x1="0" y1="-9" x2="0" y2="-5.5" stroke="#3c78d8" stroke-width="0.7"/>
+      <circle cx="0" cy="-10" r="1.4" fill="#3c78d8"/>
+      <rect x="-6.5" y="-5.5" width="13" height="11" rx="3.5" fill="#dceafc" stroke="#3c78d8" stroke-width="0.7"/>
+      <circle cx="-2.6" cy="-1" r="1.4" fill="#1a1a2e"/>
+      <circle cx="2.6" cy="-1" r="1.4" fill="#1a1a2e"/>
+      <path d="M-2.4,2.8 Q0,4.5 2.4,2.8" fill="none" stroke="#1a1a2e" stroke-width="0.55"/>
+    </g>
+    <text x="201" y="115" font-size="7" fill="#1a1a2e" text-anchor="middle">Harness Editor</text>
+    <text x="201" y="123" font-size="6" fill="#868686" text-anchor="middle">Propose</text>
+    <g id="n:inv" data-kind="node">
+      <rect x="165" y="126" width="72" height="12" rx="2" fill="#dceafc" stroke="#9dc3e6" stroke-width="0.5"/>
+      <text x="201" y="134.5" font-size="6" fill="#1a1a2e" text-anchor="middle">Invariant candidate</text>
+    </g>
+    <g id="n:dom" data-kind="node">
+      <rect x="165" y="140" width="72" height="10" rx="2" fill="#dff3ef" stroke="#9dc3e6" stroke-width="0.5"/>
+      <text x="201" y="147.5" font-size="6" fill="#1a1a2e" text-anchor="middle">Domain-specific cand.</text>
+    </g>
+  </g>
+
+  <!-- probes -->
+  <g id="n:probes" data-kind="node">
+    <rect x="250" y="86" width="66" height="66" rx="4" fill="#ffffff" stroke="#3c78d8" stroke-width="0.7"/>
+    <text x="283" y="112" font-size="7" fill="#1a1a2e" text-anchor="middle">Candidate Probes</text>
+    <text x="283" y="122" font-size="6" fill="#868686" text-anchor="middle">re-run each on q<tspan dy="1.8" font-size="4.5">t</tspan></text>
+    <rect x="262" y="131" width="42" height="12" rx="2" fill="#fdf1e3" stroke="#e8b971" stroke-width="0.5"/>
+    <text x="283" y="139.5" font-size="6" fill="#8a5a00" text-anchor="middle">contrast vs e<tspan dy="1.8" font-size="4.5">0</tspan></text>
+    <g transform="translate(254,137)" fill="none" stroke="#e8b971" stroke-width="0.7">
+      <rect x="-3" y="-3" width="6" height="6" transform="rotate(45)"/>
+    </g>
+  </g>
+
+  <!-- composer -->
+  <g id="n:composer" data-kind="node">
+    <rect x="326" y="86" width="52" height="66" rx="4" fill="#ffffff" stroke="#9dc3e6" stroke-width="0.56"/>
+    <g transform="translate(352,101)">
+      <line x1="0" y1="-11" x2="0" y2="-7" stroke="#3c78d8" stroke-width="0.7"/>
+      <circle cx="0" cy="-12" r="1.6" fill="#3c78d8"/>
+      <rect x="-8" y="-7" width="16" height="13" rx="4" fill="#dceafc" stroke="#3c78d8" stroke-width="0.7"/>
+      <circle cx="-3.2" cy="-1.5" r="1.7" fill="#1a1a2e"/>
+      <circle cx="3.2" cy="-1.5" r="1.7" fill="#1a1a2e"/>
+      <path d="M-3,3.5 Q0,5.5 3,3.5" fill="none" stroke="#1a1a2e" stroke-width="0.6"/>
+    </g>
+    <text x="352" y="121" font-size="7" fill="#1a1a2e" text-anchor="middle">Harness</text>
+    <text x="352" y="130" font-size="7" fill="#1a1a2e" text-anchor="middle">Composer</text>
+    <text x="352" y="140" font-size="6" fill="#868686" text-anchor="middle">Compose</text>
+  </g>
+
+  <!-- final harness (accent) -->
+  <g id="n:final" data-kind="node">
+    <rect x="386" y="86" width="52" height="66" rx="4" fill="#3c78d8" stroke="#2a5db0" stroke-width="0.56"/>
+    <text x="412" y="116" font-size="7" font-weight="bold" fill="#ffffff" text-anchor="middle">Final Harness</text>
+    <text x="412" y="128" font-size="7" font-weight="bold" fill="#ffffff" text-anchor="middle">H'</text>
+    <text x="412" y="141" font-size="6" fill="#dbe7f7" text-anchor="middle">deliverable</text>
+  </g>
+
+  <!-- budget pill -->
+  <g id="n:budget" data-kind="node">
+    <rect x="24" y="170" width="166" height="14" rx="7" fill="#ffffff" stroke="#9dc3e6" stroke-width="0.56"/>
+    <text x="107" y="179.5" font-size="6" fill="#555555" text-anchor="middle">budget k &#8594; parallel / sequential recursion (Fig. 4)</text>
+  </g>
+
+  <!-- ============ Band A internal edges ============ -->
+  <g id="e:run-task" data-kind="edge" data-from="q1" data-to="executor">
+    <line x1="127" y1="38" x2="127" y2="86" stroke="#3c78d8" stroke-width="1.1" marker-end="url(#head-blue)"/>
+    <text x="132" y="78" font-size="6" fill="#555555">q<tspan dy="1.8" font-size="4.5">t</tspan><tspan dy="-1.8"> + H</tspan></text>
+  </g>
+  <g id="e:mount" data-kind="edge" data-from="agent-anchor" data-to="executor">
+    <line x1="92" y1="119" x2="100" y2="119" stroke="#868686" stroke-width="0.57" marker-end="url(#head-grey)"/>
+  </g>
+  <g id="e:to-editor" data-kind="edge" data-from="executor" data-to="editor">
+    <line x1="154" y1="119" x2="162" y2="119" stroke="#3c78d8" stroke-width="1.1" marker-end="url(#head-blue)"/>
+    <text x="100" y="161" font-size="6" fill="#555555">trajectory + deliverable e<tspan dy="1.8" font-size="4.5">0</tspan></text>
+  </g>
+  <g id="e:to-probes" data-kind="edge" data-from="editor" data-to="probes">
+    <line x1="240" y1="119" x2="250" y2="119" stroke="#3c78d8" stroke-width="1.1" marker-end="url(#head-blue)"/>
+  </g>
+  <g id="e:to-composer" data-kind="edge" data-from="probes" data-to="composer">
+    <line x1="316" y1="119" x2="326" y2="119" stroke="#3c78d8" stroke-width="1.1" marker-end="url(#head-blue)"/>
+    <text x="321" y="161" font-size="6" fill="#555555" text-anchor="middle">contrasts + diffs</text>
+  </g>
+  <g id="e:compose" data-kind="edge" data-from="composer" data-to="final">
+    <line x1="378" y1="119" x2="386" y2="119" stroke="#3c78d8" stroke-width="1.1" marker-end="url(#head-blue)"/>
+    <text x="382" y="161" font-size="6" fill="#555555" text-anchor="middle">selective merge</text>
+  </g>
+
+  <!-- ============ channel: cross-task dashed arrows ============ -->
+  <g id="e:to-reflector" data-kind="edge" data-from="final" data-to="reflector">
+    <path d="M412,152 L412,200 L316,200 L316,234" fill="none" stroke="#8e7cc3" stroke-width="1.0" stroke-dasharray="2.5 1.9" marker-end="url(#head-purple)"/>
+    <text x="170" y="196" font-size="6.5" fill="#8e7cc3">improvement record D<tspan dy="1.8" font-size="4.5">t</tspan></text>
+  </g>
+  <g id="e:inform" data-kind="edge" data-from="library" data-to="editor">
+    <path d="M72,257.5 L15,257.5 L15,166 L201,166 L201,152" fill="none" stroke="#8e7cc3" stroke-width="1.0" stroke-dasharray="2.5 1.9" marker-end="url(#head-purple)"/>
+    <text x="20" y="162" font-size="6.5" fill="#8e7cc3">inform future proposals</text>
+  </g>
+
+  <!-- ============ Band B: harnessing-level recursion ============ -->
+  <g id="c:harness-level" data-kind="container">
+    <rect x="12" y="206" width="430" height="74" rx="8" fill="#f3eefa" stroke="#b4a7d6" stroke-width="0.6"/>
+    <text x="227" y="219" font-size="7" font-weight="bold" fill="#1a1a2e" text-anchor="middle">Harnessing-Level Recursion</text>
+    <text x="227" y="229" font-size="6" fill="#868686" text-anchor="middle">improve how future harnesses are improved</text>
+  </g>
+
+  <!-- improvement harness box -->
+  <g id="c:improvement-harness" data-kind="container">
+    <rect x="60" y="238" width="202" height="38" rx="4" fill="#ffffff" stroke="#b4a7d6" stroke-width="0.7"/>
+    <text x="161" y="248" font-size="6.5" font-weight="bold" fill="#1a1a2e" text-anchor="middle">Improvement Harness R<tspan dy="1.8" font-size="4.5">t</tspan><tspan dy="-1.8" font-weight="normal" fill="#868686"> &#183; Improvement Library</tspan></text>
+    <g id="n:library" data-kind="node">
+      <rect x="72" y="252" width="178" height="11" rx="2" fill="#ece4f5" stroke="#b4a7d6" stroke-width="0.5"/>
+      <line x1="162" y1="253.5" x2="162" y2="261.5" stroke="#b4a7d6" stroke-width="0.5"/>
+      <text x="116" y="260" font-size="6" fill="#1a1a2e" text-anchor="middle">adopted harnesses</text>
+      <text x="208" y="260" font-size="6" fill="#1a1a2e" text-anchor="middle">lessons</text>
+    </g>
+    <g id="n:fixed-note" data-kind="node">
+      <g transform="translate(102,268)" stroke="#6fa8dc" stroke-width="0.6" stroke-linecap="round">
+        <line x1="-3" y1="0" x2="3" y2="0"/><line x1="0" y1="-3" x2="0" y2="3"/>
+        <line x1="-2.1" y1="-2.1" x2="2.1" y2="2.1"/><line x1="-2.1" y1="2.1" x2="2.1" y2="-2.1"/>
+      </g>
+      <text x="109" y="270.5" font-size="6" fill="#868686">fixed during a task, updated after each task</text>
+    </g>
+  </g>
+
+  <!-- reflector -->
+  <g id="n:reflector" data-kind="node">
+    <rect x="288" y="234" width="56" height="42" rx="4" fill="#ffffff" stroke="#b4a7d6" stroke-width="0.7"/>
+    <g transform="translate(316,246)">
+      <line x1="0" y1="-9" x2="0" y2="-5.5" stroke="#8e7cc3" stroke-width="0.7"/>
+      <circle cx="0" cy="-10" r="1.4" fill="#8e7cc3"/>
+      <rect x="-6.5" y="-5.5" width="13" height="11" rx="3.5" fill="#e6dcf5" stroke="#8e7cc3" stroke-width="0.7"/>
+      <circle cx="-2.6" cy="-1" r="1.4" fill="#1a1a2e"/>
+      <circle cx="2.6" cy="-1" r="1.4" fill="#1a1a2e"/>
+      <path d="M-2.4,2.8 Q0,4.5 2.4,2.8" fill="none" stroke="#1a1a2e" stroke-width="0.55"/>
+      <circle cx="6.5" cy="5" r="3.2" fill="none" stroke="#8e7cc3" stroke-width="0.7"/>
+      <line x1="8.8" y1="7.3" x2="10.5" y2="9" stroke="#8e7cc3" stroke-width="0.7"/>
+    </g>
+    <text x="316" y="265" font-size="7" fill="#1a1a2e" text-anchor="middle">Reflector</text>
+    <text x="316" y="273" font-size="6" fill="#868686" text-anchor="middle">Reflect on D<tspan dy="1.8" font-size="4.5">t</tspan></text>
+  </g>
+
+  <!-- update arrow -->
+  <g id="e:update" data-kind="edge" data-from="reflector" data-to="library">
+    <line x1="288" y1="257.5" x2="250" y2="257.5" stroke="#868686" stroke-width="0.57" marker-end="url(#head-grey)"/>
+    <text x="275" y="253" font-size="6.5" fill="#555555" text-anchor="middle">Update</text>
+  </g>
+
+  <!-- legend -->
+  <g id="legend" data-kind="legend">
+    <text x="358" y="241" font-size="6.5" font-weight="bold" fill="#1a1a2e">Legend</text>
+    <g transform="translate(362,250)" stroke="#6fa8dc" stroke-width="0.6" stroke-linecap="round">
+      <line x1="-3" y1="0" x2="3" y2="0"/><line x1="0" y1="-3" x2="0" y2="3"/>
+      <line x1="-2.1" y1="-2.1" x2="2.1" y2="2.1"/><line x1="-2.1" y1="2.1" x2="2.1" y2="-2.1"/>
+    </g>
+    <text x="371" y="252.5" font-size="6" fill="#555555">frozen &#8212; fixed</text>
+    <text x="371" y="260" font-size="6" fill="#555555">during a task</text>
+    <line x1="358" y1="267" x2="370" y2="267" stroke="#8e7cc3" stroke-width="1.0" stroke-dasharray="2.5 1.9"/>
+    <text x="375" y="269.5" font-size="6" fill="#555555">cross-task flow</text>
+    <line x1="358" y1="275" x2="370" y2="275" stroke="#3c78d8" stroke-width="1.1"/>
+    <text x="375" y="277.5" font-size="6" fill="#555555">main path</text>
+  </g>
+
+  <!-- ============ step badges ============ -->
+  <g id="s:1" data-kind="step">
+    <circle cx="127" cy="56" r="4.5" fill="#ffffff" stroke="#3c78d8" stroke-width="0.7"/>
+    <text x="127" y="58.5" font-size="6" fill="#1a1a2e" text-anchor="middle">1</text>
+  </g>
+  <g id="s:2" data-kind="step">
+    <circle cx="158" cy="111" r="4.5" fill="#ffffff" stroke="#3c78d8" stroke-width="0.7"/>
+    <text x="158" y="113.5" font-size="6" fill="#1a1a2e" text-anchor="middle">2</text>
+  </g>
+  <g id="s:3" data-kind="step">
+    <circle cx="245" cy="111" r="4.5" fill="#ffffff" stroke="#3c78d8" stroke-width="0.7"/>
+    <text x="245" y="113.5" font-size="6" fill="#1a1a2e" text-anchor="middle">3</text>
+  </g>
+  <g id="s:4" data-kind="step">
+    <circle cx="321" cy="111" r="4.5" fill="#ffffff" stroke="#3c78d8" stroke-width="0.7"/>
+    <text x="321" y="113.5" font-size="6" fill="#1a1a2e" text-anchor="middle">4</text>
+  </g>
+</svg>

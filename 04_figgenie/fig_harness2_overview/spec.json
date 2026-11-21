@@ -1,0 +1,430 @@
+{
+  "meta": {
+    "id": "harness2-fig-overview",
+    "title": "Harness2: two coupled recursion levels over an open-world task stream",
+    "system": {
+      "name": "Harness2",
+      "one_liner": "a plug-and-play framework that refines an agent's execution harness for the current task via a contrastive Propose-Probe-Compose step, and reflects on each refinement to update an improvement harness that guides future tasks"
+    },
+    "family": "ai",
+    "venue": "acl",
+    "kind": "architecture",
+    "figure_kind": "whole-system",
+    "column": "double",
+    "width_pt": 454,
+    "max_height_pt": 300,
+    "template": "ai",
+    "direction": "top-down",
+    "panels": 2,
+    "palette": "office-pastel",
+    "font": "helvetica",
+    "font_cjk": "source-han-sans",
+    "step_markers": "circled-numbers",
+    "language": "en",
+    "version": 1,
+    "ai": {
+      "kinds": [
+        "concept-schematic",
+        "stage-pipeline"
+      ],
+      "variant": "two-band-coupled-recursion",
+      "subfield": "agents",
+      "subfield2": "llm-nlp",
+      "arrangement": "bands",
+      "grouping": [
+        "tinted-regions",
+        "framed-boxes",
+        "whitespace"
+      ],
+      "samples": "none",
+      "idioms": [
+        "agent-loop",
+        "llm",
+        "memory-store",
+        "file-stack",
+        "robot-head"
+      ],
+      "materials": [
+        "no bitmaps: all icons drawn from the parts library as vector robot heads, file stacks and snowflakes"
+      ],
+      "notes": "two full-width bands. Top band (blue tint): the open-world task stream strip above it; inside, a four-stage pipeline Agent Executor -> Harness Editor -> Candidate Probes -> Harness Composer ending in the accent Final Harness box, with the two proposed candidates drawn as two small cards under the Editor and a budget-k pill below. Bottom band (purple tint): Reflector -> Improvement Harness box holding the library (adopted harnesses + lessons), fixed during a task (snowflake), updated after each task. Dashed cross-task arrows couple the bands: improvement record down, lessons up, and a return arc to the task stream."
+    },
+    "caption_draft": "Figure 1. Harness2 couples two recursion levels. For each open-world task q_t (no ground-truth verifier), task-level recursion runs the current execution harness for a reference trajectory, proposes invariant and domain-specific candidate harnesses, probes them on the same task for behavioral contrasts, and composes a final harness. Harnessing-level recursion then reflects on the improvement record to update the improvement harness's library, which informs the proposals of subsequent tasks."
+  },
+  "panels": [
+    {
+      "id": "task-level",
+      "label": "Task-Level Recursion",
+      "axis": "narrative",
+      "order": 0,
+      "verdict": "ours",
+      "note": "improve the execution harness for the current task; blue tinted zone"
+    },
+    {
+      "id": "harness-level",
+      "label": "Harnessing-Level Recursion",
+      "axis": "narrative",
+      "order": 1,
+      "verdict": "ours",
+      "note": "improve how future harnesses are improved; purple tinted zone"
+    }
+  ],
+  "containers": [
+    {
+      "id": "task-stream",
+      "label": "Open-world task stream  (no ground-truth verifier)",
+      "kind": "none",
+      "role": "existing",
+      "panel": "task-level",
+      "order": 0,
+      "note": "a horizontal strip of task cards q1 q2 ... qN above the blue band, no frame, label sits left"
+    },
+    {
+      "id": "improvement-harness",
+      "label": "Improvement Harness R_t",
+      "kind": "solid",
+      "role": "novel",
+      "panel": "harness-level",
+      "order": 1,
+      "note": "a white rounded box inside the purple band holding the library; snowflake note: fixed during a task, updated after it"
+    },
+    {
+      "id": "editor",
+      "label": "Harness Editor",
+      "kind": "panel",
+      "role": "novel",
+      "panel": "task-level",
+      "order": 3,
+      "note": "framed panel with a robot-head icon, name 'Harness Editor', sub-caption 'Propose'; contains the two candidate mini-cards (inv, dom)"
+    },
+    {
+      "id": "task-level",
+      "label": "Task-Level Recursion",
+      "kind": "band",
+      "role": "novel",
+      "panel": "task-level",
+      "order": 0,
+      "note": "pale blue band enclosing the whole task-level pipeline; title centred"
+    },
+    {
+      "id": "harness-level",
+      "label": "Harnessing-Level Recursion",
+      "kind": "band",
+      "role": "novel",
+      "panel": "harness-level",
+      "order": 0,
+      "note": "pale purple band enclosing the harnessing-level stage; title centred"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "q1",
+      "label": "q1",
+      "kind": "text",
+      "role": "external",
+      "parent": "task-stream",
+      "panel": "task-level",
+      "order": 0,
+      "note": "small task card, white with grey border"
+    },
+    {
+      "id": "q2",
+      "label": "q2",
+      "kind": "text",
+      "role": "external",
+      "parent": "task-stream",
+      "panel": "task-level",
+      "order": 1
+    },
+    {
+      "id": "q-ellipsis",
+      "label": "...",
+      "kind": "text",
+      "role": "external",
+      "parent": "task-stream",
+      "panel": "task-level",
+      "order": 2,
+      "note": "plain ellipsis, no box"
+    },
+    {
+      "id": "qn",
+      "label": "qN",
+      "kind": "text",
+      "role": "external",
+      "parent": "task-stream",
+      "panel": "task-level",
+      "order": 3
+    },
+    {
+      "id": "agent-anchor",
+      "label": "Agent = Model + Harness",
+      "kind": "other",
+      "role": "existing",
+      "panel": "task-level",
+      "order": 1,
+      "idiom": "file-stack",
+      "note": "a compact card at the left of the blue band: a frozen-model chip with snowflake stacked over a 3-file harness stack labelled system prompt / memory / skills, caption 'Agent = Model + Harness'; the model chip carries the frozen snowflake"
+    },
+    {
+      "id": "executor",
+      "label": "Agent Executor",
+      "kind": "actor",
+      "role": "existing",
+      "panel": "task-level",
+      "order": 2,
+      "idiom": "robot-head",
+      "note": "robot head icon above its name; sub-caption 'runs q_t with H'"
+    },
+    {
+      "id": "inv",
+      "label": "Invariant candidate",
+      "kind": "text",
+      "role": "novel",
+      "parent": "editor",
+      "panel": "task-level",
+      "order": 0,
+      "text_lines": [
+        "Invariant candidate",
+        "planning - tools - context - delegation"
+      ],
+      "note": "mini-card inside the Harness Editor box: 'Invariant candidate' with grey sub-line 'planning / tools / context / delegation'"
+    },
+    {
+      "id": "dom",
+      "label": "Domain-specific cand.",
+      "kind": "text",
+      "role": "novel",
+      "parent": "editor",
+      "panel": "task-level",
+      "order": 1,
+      "text_lines": [
+        "Domain-specific candidate",
+        "domain knowledge - procedures - constraints"
+      ],
+      "note": "mini-card inside the Harness Editor box; full paper term 'Domain-specific candidate' abbreviated to fit 70 pt at 6 pt type; caption uses the full term"
+    },
+    {
+      "id": "probes",
+      "label": "Candidate Probes",
+      "kind": "other",
+      "role": "novel",
+      "panel": "task-level",
+      "order": 4,
+      "note": "framed box: title 'Candidate Probes', sub-line 're-run each on q_t', contrast line with a small diamond 'contrast vs e_0' (behavioral contrast, not correctness)"
+    },
+    {
+      "id": "composer",
+      "label": "Harness Composer",
+      "kind": "actor",
+      "role": "novel",
+      "panel": "task-level",
+      "order": 5,
+      "idiom": "robot-head",
+      "note": "robot head with wrench; sub-caption 'Compose'"
+    },
+    {
+      "id": "final",
+      "label": "Final Harness H'",
+      "kind": "text",
+      "role": "novel",
+      "panel": "task-level",
+      "order": 6,
+      "note": "the one saturated accent box (blue fill, white text); two lines 'Final Harness' / \"H'\""
+    },
+    {
+      "id": "budget",
+      "label": "budget k → parallel / sequential recursion (Fig. 4)",
+      "kind": "other",
+      "role": "novel",
+      "panel": "task-level",
+      "order": 7,
+      "note": "a small pill at the bottom edge of the blue band; x-annotation, not a pipeline stage"
+    },
+    {
+      "id": "reflector",
+      "label": "Reflector",
+      "kind": "actor",
+      "role": "novel",
+      "panel": "harness-level",
+      "order": 0,
+      "idiom": "robot-head",
+      "note": "robot head with magnifier; sub-caption 'Reflect on D_t'"
+    },
+    {
+      "id": "library",
+      "label": "adopted harnesses · lessons",
+      "kind": "text",
+      "role": "novel",
+      "parent": "improvement-harness",
+      "panel": "harness-level",
+      "order": 0,
+      "text_lines": [
+        "adopted harnesses",
+        "lessons"
+      ],
+      "note": "two side-by-side slots under the box title, drawn as the Improvement Library"
+    },
+    {
+      "id": "fixed-note",
+      "label": "fixed during a task, updated after each task",
+      "kind": "other",
+      "role": "novel",
+      "parent": "improvement-harness",
+      "panel": "harness-level",
+      "order": 1,
+      "note": "a snowflake + caption line inside the Improvement Harness box"
+    }
+  ],
+  "edges": [
+    {
+      "id": "run-task",
+      "from": "q1",
+      "to": "executor",
+      "kind": "data",
+      "style": "solid",
+      "weight": "main",
+      "label": "q_t + H",
+      "note": "step 1: the task enters with the current harness (drawn from the q-card row down to the executor)"
+    },
+    {
+      "id": "mount",
+      "from": "agent-anchor",
+      "to": "executor",
+      "kind": "control",
+      "style": "solid",
+      "note": "thin grey arrow: the harness mounts around the model to form the agent"
+    },
+    {
+      "id": "to-editor",
+      "from": "executor",
+      "to": "editor",
+      "kind": "data",
+      "style": "solid",
+      "weight": "main",
+      "label": "trajectory + deliverable e_0",
+      "note": "reference execution"
+    },
+    {
+      "id": "to-probes",
+      "from": "editor",
+      "to": "probes",
+      "kind": "control",
+      "style": "solid",
+      "weight": "main",
+      "label": "candidates",
+      "note": "the two proposed candidates enter the probe stage"
+    },
+    {
+      "id": "to-composer",
+      "from": "probes",
+      "to": "composer",
+      "kind": "data",
+      "style": "solid",
+      "weight": "main",
+      "label": "contrasts + diffs",
+      "note": "all task-local evidence"
+    },
+    {
+      "id": "compose",
+      "from": "composer",
+      "to": "final",
+      "kind": "control",
+      "style": "solid",
+      "weight": "main",
+      "note": "selective merge: adopt / revise / keep"
+    },
+    {
+      "id": "to-reflector",
+      "from": "final",
+      "to": "reflector",
+      "kind": "feedback",
+      "style": "dashed",
+      "weight": "main",
+      "label": "improvement record D_t",
+      "note": "cross-task: after the deliverable, the whole refinement record goes to the Reflector; crosses from the blue band down to the purple band"
+    },
+    {
+      "id": "update",
+      "from": "reflector",
+      "to": "library",
+      "kind": "control",
+      "style": "solid",
+      "label": "Update",
+      "note": "writes adopted harnesses + lessons into the library"
+    },
+    {
+      "id": "inform",
+      "from": "library",
+      "to": "editor",
+      "kind": "feedback",
+      "style": "dashed",
+      "label": "inform future proposals",
+      "note": "cross-task: the library feeds the Editor (and Composer) of subsequent tasks; routed up the left side"
+    },
+    {
+      "id": "next-task",
+      "from": "qn",
+      "to": "q1",
+      "kind": "feedback",
+      "style": "dashed",
+      "label": "move to the next task",
+      "note": "a return arc over the task stream closing the outer loop"
+    }
+  ],
+  "steps": [
+    {
+      "n": 1,
+      "attached_to": "executor",
+      "text": "run the current harness for a reference trajectory"
+    },
+    {
+      "n": 2,
+      "attached_to": "to-probes",
+      "text": "propose invariant and domain-specific candidate harnesses"
+    },
+    {
+      "n": 3,
+      "attached_to": "probes",
+      "text": "probe each candidate on the same task for behavioral contrasts"
+    },
+    {
+      "n": 4,
+      "attached_to": "composer",
+      "text": "compose the final harness from the evidence"
+    }
+  ],
+  "legend": {
+    "mode": "explicit",
+    "placement": "below",
+    "items": [
+      {
+        "id": "frozen",
+        "label": "frozen: fixed during a task",
+        "swatch": {
+          "kind": "symbol",
+          "role": "snowflake"
+        }
+      },
+      {
+        "id": "cross-task",
+        "label": "cross-task flow (after each task)",
+        "swatch": {
+          "kind": "line",
+          "role": "#8e7cc3",
+          "line_style": "dashed"
+        }
+      },
+      {
+        "id": "main-path",
+        "label": "main path within a task",
+        "swatch": {
+          "kind": "line",
+          "role": "#3c78d8",
+          "line_style": "solid"
+        }
+      }
+    ]
+  },
+  "notes": "Read the top strip left to right (q_1 ... q_N, the outer return arc closes over it), then the blue band left to right through steps 1-4 to the accent Final Harness box, then step down the dashed improvement-record arrow into the purple band, and close the loop along the dashed inform arrow and the next-task arc. The two bands are the two recursion levels; their tints are the only region colours. The Final Harness box is the single saturated fill; every other fill is pale. The frozen snowflake appears twice (model chip, improvement harness note).",
+  "x-layout": "two full-width bands, top-down; band A y 46-176, band B y 210-282; task strip y 6-40; dashed cross-band arrows in the free channel y 176-210; legend inside band B bottom-right"
+}

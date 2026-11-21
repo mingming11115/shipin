@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>混合演示：真实页面 × 动画叠加</title>
+<style>
+  body { margin:0; background:#0d1117; display:flex; flex-direction:column; align-items:center; gap:12px; padding:20px; font-family:"Microsoft YaHei",sans-serif; }
+  #stage { position:relative; width:1280px; aspect-ratio:16/9; border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,.6); }
+  #stage img.bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  /* 星数滚动大字（叠在 Star 按钮上方） */
+  .counter {
+    position:absolute; left:62%; top:24%; transform:translateX(-50%);
+    font-weight:800; font-size:64px; color:#ffd943;
+    text-shadow:0 0 24px rgba(255,217,67,.45), 0 2px 0 rgba(0,0,0,.8);
+    opacity:0; transition:opacity .3s;
+  }
+  .counter.show { opacity:1; }
+  .counter .label { display:block; font-size:20px; color:#e6edf3; font-weight:600; text-align:center; letter-spacing:2px; }
+  /* 脉冲红圈：坐标按截图上 Star 按钮位置标定（百分比） */
+  .ring {
+    position:absolute; left:79.5%; top:18.5%; width:5.2%; aspect-ratio:2.6/1;
+    transform:translate(-50%,-50%);
+    border:5px solid #f85149; border-radius:50%;
+    animation:pulse 1.6s ease-out infinite; opacity:0;
+  }
+  .ring.show { opacity:1; }
+  @keyframes pulse {
+    0% { box-shadow:0 0 0 0 rgba(248,81,73,.55); }
+    70% { box-shadow:0 0 0 26px rgba(248,81,73,0); }
+    100% { box-shadow:0 0 0 0 rgba(248,81,73,0); }
+  }
+  /* 上升的星星粒子 */
+  .star { position:absolute; color:#ffd943; font-size:22px; opacity:0; pointer-events:none; }
+  @keyframes rise {
+    0% { transform:translateY(0) scale(.6); opacity:0; }
+    15% { opacity:.95; }
+    100% { transform:translateY(-160px) scale(1.15) rotate(20deg); opacity:0; }
+  }
+  #ctrl { display:flex; gap:14px; }
+  button {
+    background:#238636; color:#fff; border:none; border-radius:8px;
+    padding:12px 28px; font-size:18px; font-weight:700; cursor:pointer; font-family:inherit;
+  }
+  button.ghost { background:#30363d; }
+  #tip { color:#8b949e; font-size:16px; }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <img class="bg" src="shots/gh_repo_top.png" alt="真实 GitHub 仓库页截图">
+    <div class="ring" id="ring"></div>
+    <div class="counter" id="counter"><span class="label">STARS</span><span id="num">0</span></div>
+    <div id="particles"></div>
+  </div>
+  <div id="ctrl">
+    <button onclick="play()">▶ 播放叠加动画</button>
+    <button class="ghost" onclick="reset()">重置</button>
+  </div>
+  <div id="tip">底层 = 真实页面截图（可信度） · 上层 = 动画强调（红圈脉冲 + 数字滚动 + 星星粒子）</div>
+
+<script>
+  const TARGET = 24623;
+  const numEl = document.getElementById('num');
+  const counter = document.getElementById('counter');
+  const ring = document.getElementById('ring');
+  const stage = document.getElementById('stage');
+  let raf;
+
+  function spawnStar() {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.textContent = '★';
+    s.style.left = (74 + Math.random() * 12) + '%';
+    s.style.top = (28 + Math.random() * 10) + '%';
+    s.style.fontSize = (14 + Math.random() * 20) + 'px';
+    s.style.animation = `rise ${1.2 + Math.random()}s ease-out forwards`;
+    stage.appendChild(s);
+    setTimeout(() => s.remove(), 2400);
+  }
+
+  function play() {
+    reset();
+    counter.classList.add('show');
+    ring.classList.add('show');
+    const t0 = performance.now(), dur = 2200;
+    (function tick(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);           // easeOutCubic
+      numEl.textContent = Math.round(TARGET * eased).toLocaleString('en-US');
+      if (p < 1) raf = requestAnimationFrame(tick);
+      else {                                           // 到数后持续冒星星
+        const iv = setInterval(spawnStar, 160);
+        setTimeout(() => clearInterval(iv), 4000);
+      }
+    })(t0);
+  }
+  function reset() {
+    cancelAnimationFrame(raf);
+    counter.classList.remove('show');
+    ring.classList.remove('show');
+    numEl.textContent = '0';
+  }
+</script>
+</body>
+</html>
